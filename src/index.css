@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0A0E0D;
+  --surface: #111817;
+  --text: #D6E4DF;
+  --muted: #5C6B66;
+  --accent: #1FE07A;
+  --accent2: #FF4D5E;
+  --hairline: #1F2A27;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans, 'IBM Plex Mono', monospace);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.font-display {
+  font-family: var(--font-display, 'JetBrains Mono', monospace);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* Hairline borders */
+.hairline {
+  border-color: var(--hairline);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--hairline);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a3a36;
+}
+
+/* Price flash animations */
+@keyframes flashUp {
+  0% { background-color: rgba(31, 224, 122, 0.28); }
+  100% { background-color: transparent; }
+}
+@keyframes flashDown {
+  0% { background-color: rgba(255, 77, 94, 0.28); }
+  100% { background-color: transparent; }
+}
+.flash-up {
+  animation: flashUp 220ms ease-out forwards;
+}
+.flash-down {
+  animation: flashDown 220ms ease-out forwards;
+}
+
+/* Blinking live dot */
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.82); }
+}
+.live-pulse {
+  animation: livePulse 1.4s ease-in-out infinite;
+}
+@keyframes liveTick {
+  0% { transform: scale(1.6); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.85; }
+}
+.live-tick {
+  animation: liveTick 200ms ease-out;
+}
+
+/* Fade in on load */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up {
+  animation: fadeInUp 280ms ease-out forwards;
+}
+
+/* Loading shimmer line */
+@keyframes blinkCaret {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.blink-caret::after {
+  content: '_';
+  animation: blinkCaret 1s step-end infinite;
+}
+
+.no-radius, .no-radius * {
+  border-radius: 0 !important;
+}
+
+/* Selection */
+::selection {
+  background: rgba(31, 224, 122, 0.3);
+  color: var(--text);
+}
+
+/* Hide number input spinners */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
